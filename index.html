@@ -283,18 +283,14 @@
     .status { grid-template-columns: 1fr; }
   }
 
-  /* ---------- print (A4 landscape) ---------- */
+  /* ---------- print (A4) ---------- */
   @page {
-    size: A4 landscape;
-    margin: 14mm 18mm;
+    size: A4;
+    margin: 14mm 12mm;
   }
   @media print {
     body { background: var(--paper); }
     .wrap { max-width: 100%; }
-    /* 横向きで幅に余裕ができる分、本文の1行が長くなりすぎないように上限を設ける */
-    .feature-copy, .notif-copy, .signin-copy, .concept-card p, .sec-lede {
-      max-width: 480px;
-    }
     .hero {
       border-bottom: none;
       padding: 6mm 0 10mm;
