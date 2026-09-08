@@ -282,6 +282,32 @@
     .tl-stage:nth-child(2)::after { content: none; }
     .status { grid-template-columns: 1fr; }
   }
+
+  /* ---------- print (A4) ---------- */
+  @page {
+    size: A4;
+    margin: 14mm 12mm;
+  }
+  @media print {
+    body { background: var(--paper); }
+    .wrap { max-width: 100%; }
+    .hero {
+      border-bottom: none;
+      padding: 6mm 0 10mm;
+      break-after: page;
+    }
+    section {
+      border-bottom: none;
+      padding: 4mm 0;
+      break-after: page;
+    }
+    section:last-of-type { break-after: auto; }
+    .concept-grid, .board-compare, .timeline, .pair-shots,
+    .feature-split, .item-row, .board-card {
+      break-inside: avoid;
+    }
+    footer { padding: 8mm 0; }
+  }
 </style>
 </head>
 <body>
