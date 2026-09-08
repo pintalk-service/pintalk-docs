@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地縛板 紹介</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap">
+<style>
+  :root {
+    --paper: #f7f1e0;
+    --paper-deep: #ede0c4;
+    --paper-line: #d8c9a3;
+    --ink: #3b2a1b;
+    --ink-soft: #6b5a44;
+    --ink-faint: #96876d;
+    --seal: #b8472e;
+    --seal-soft: #f0d9ce;
+    --slate: #8a8780;
+    --card-shadow: 0 1px 0 rgba(59, 42, 27, 0.06);
+    --serif: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    --sans: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #201810;
+      --paper-deep: #2b2116;
+      --paper-line: #4a3b29;
+      --ink: #f2e9d8;
+      --ink-soft: #cdbc9c;
+      --ink-faint: #8c7c61;
+      --seal: #e0704f;
+      --seal-soft: #3d2620;
+      --slate: #6e6a61;
+      --card-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #201810;
+    --paper-deep: #2b2116;
+    --paper-line: #4a3b29;
+    --ink: #f2e9d8;
+    --ink-soft: #cdbc9c;
+    --ink-faint: #8c7c61;
+    --seal: #e0704f;
+    --seal-soft: #3d2620;
+    --slate: #6e6a61;
+    --card-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: 76px 0 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--paper-line);
+    background:
+      radial-gradient(ellipse at 50% -10%, var(--seal-soft) 0%, transparent 55%),
+      var(--paper);
+  }
+  .hero-icon {
+    width: 76px; height: 76px;
+    border-radius: 18px;
+    margin: 0 auto 22px;
+    display: block;
+    box-shadow: 0 6px 18px rgba(59,42,27,0.18);
+  }
+  .wordmark { display: flex; justify-content: center; gap: 0; margin-bottom: 22px; }
+  .wm-tile {
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 30px;
+    border: 1.5px solid var(--slate);
+    color: var(--ink);
+    background: transparent;
+    position: relative;
+  }
+  .wm-tile.accent {
+    background: var(--seal);
+    border-color: var(--seal);
+    color: var(--paper);
+    z-index: 1;
+    margin: 0 -1.5px;
+  }
+  .wm-furi {
+    position: absolute; top: -19px; left: 0; right: 0;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--ink-faint);
+  }
+  .wm-tile.accent .wm-furi { color: var(--seal); }
+  .hero h1 {
+    font-size: 15px; font-weight: 600; letter-spacing: 0.32em;
+    color: var(--ink-soft); margin-bottom: 14px;
+  }
+  .hero .thesis {
+    font-size: 22px; font-weight: 500; color: var(--ink);
+    max-width: 30em; margin: 0 auto 10px;
+  }
+  .hero .sub {
+    font-size: 14.5px; color: var(--ink-soft); max-width: 34em; margin: 0 auto;
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section { padding: 58px 0; border-bottom: 1px solid var(--paper-line); }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow {
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em;
+    color: var(--seal); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before {
+    content: ""; width: 16px; height: 1px; background: var(--seal); display: inline-block;
+  }
+  .sec-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .sec-lede { font-size: 15px; color: var(--ink-soft); max-width: 42em; margin-bottom: 34px; }
+
+  /* ---------- concept: two-line hanko-style motif ---------- */
+  .concept-pun {
+    display: flex; gap: 20px; align-items: center;
+    padding: 22px 26px; background: var(--paper-deep);
+    border: 1px solid var(--paper-line); border-radius: 4px;
+    margin-bottom: 28px;
+  }
+  .concept-pun .k { font-family: var(--serif); font-size: 19px; font-weight: 600; white-space: nowrap; }
+  .concept-pun .arrow { color: var(--seal); font-size: 18px; }
+  .concept-pun .note { font-size: 13.5px; color: var(--ink-soft); }
+
+  .concept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .concept-card {
+    border: 1px solid var(--paper-line); border-radius: 4px; padding: 20px 18px;
+    background: var(--paper-deep);
+  }
+  .concept-card .num { font-family: var(--serif); font-size: 13px; color: var(--seal); font-weight: 700; margin-bottom: 10px; }
+  .concept-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .concept-card p { font-size: 13.5px; color: var(--ink-soft); }
+
+  /* ---------- lifecycle timeline (real sequence -> numbered) ---------- */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .tl-stage { position: relative; padding: 0 14px 0 0; }
+  .tl-stage:not(:last-child)::after {
+    content: "→"; position: absolute; right: -2px; top: 22px;
+    color: var(--slate); font-size: 15px;
+  }
+  .tl-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1.5px solid var(--slate); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px; background: var(--paper);
+  }
+  .tl-dot svg { width: 22px; height: 22px; overflow: visible; }
+  .tl-stage.is-torn .tl-dot { border-color: var(--seal); }
+  .tl-stage h3 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .tl-stage .when { font-size: 12px; color: var(--ink-faint); margin-bottom: 8px; display: block; }
+  .tl-stage p { font-size: 13px; color: var(--ink-soft); }
+
+  /* ---------- board type comparison ---------- */
+  .board-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .board-card {
+    border: 1px solid var(--paper-line); border-radius: 6px; overflow: hidden;
+    background: var(--paper-deep);
+  }
+  .board-card .head {
+    padding: 16px 20px; font-family: var(--serif); font-weight: 700; font-size: 17px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .board-card.gold .head { background: var(--seal); color: var(--paper); border-color: var(--seal); }
+  .board-card .price { font-size: 12px; font-weight: 500; opacity: 0.85; }
+  .board-card ul { list-style: none; margin: 0; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .board-card li { font-size: 13.5px; color: var(--ink-soft); padding-left: 16px; position: relative; }
+  .board-card li::before { content: "・"; position: absolute; left: 0; color: var(--ink-faint); }
+
+  .extend-note {
+    margin-top: 20px; padding: 16px 20px; border: 1px dashed var(--paper-line); border-radius: 4px;
+    font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 12px; align-items: baseline;
+  }
+  .extend-note b { color: var(--ink); font-weight: 700; white-space: nowrap; }
+
+  /* ---------- notification / badge mock phone ---------- */
+  .notif-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .notif-copy h3 { font-size: 16px; font-weight: 700; margin: 18px 0 6px; }
+  .notif-copy h3:first-child { margin-top: 0; }
+  .notif-copy p { font-size: 13.5px; color: var(--ink-soft); }
+  .phone-mock {
+    border: 1.5px solid var(--paper-line); border-radius: 28px; padding: 10px;
+    background: var(--paper-deep); box-shadow: var(--card-shadow);
+  }
+  .phone-mock .screen {
+    background: var(--paper); border-radius: 20px; padding: 18px 16px; position: relative;
+  }
+  .badge-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .badge-row .avatar {
+    width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--slate);
+    display: flex; align-items: center; justify-content: center; font-size: 15px; position: relative;
+  }
+  .badge-row .dot {
+    position: absolute; top: -3px; right: -3px; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--seal); border: 2px solid var(--paper);
+  }
+  .board-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--paper-line); font-size: 12.5px;
+  }
+  .board-row:last-child { border-bottom: none; }
+  .board-row .name { color: var(--ink); font-weight: 500; }
+  .board-row .tag { color: var(--seal); font-size: 11px; }
+  .board-row .visited { color: var(--ink-faint); font-size: 11px; }
+
+  /* ---------- sign-in screenshot ---------- */
+  .signin-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .signin-shot {
+    border: 1.5px solid var(--paper-line); border-radius: 22px; padding: 8px;
+    background: var(--paper-deep); box-shadow: var(--card-shadow); justify-self: center;
+  }
+  .signin-shot img { display: block; width: 220px; border-radius: 16px; }
+  .signin-copy ul { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .signin-copy li { font-size: 14px; color: var(--ink-soft); padding-left: 20px; position: relative; }
+  .signin-copy li::before { content: "印"; position: absolute; left: -2px; top: -1px; font-family: var(--serif); font-size: 10px; color: var(--seal); border: 1px solid var(--seal); width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+
+  /* ---------- reusable screenshot frame ---------- */
+  .shot-frame {
+    border: 1.5px solid var(--paper-line); border-radius: 22px; padding: 8px;
+    background: var(--paper-deep); box-shadow: var(--card-shadow);
+  }
+  .shot-frame img { display: block; width: 100%; border-radius: 16px; }
+  .shot-cap { margin-top: 12px; font-size: 12px; color: var(--ink-faint); text-align: center; }
+
+  .map-shot { max-width: 320px; margin: 34px auto 0; }
+
+  .feature-split { display: grid; grid-template-columns: 1fr 0.82fr; gap: 40px; align-items: center; }
+  .feature-split.reverse { grid-template-columns: 0.82fr 1fr; }
+  .feature-split.reverse .shot-frame { order: -1; }
+  .feature-split .shot-frame { max-width: 230px; justify-self: center; }
+  .feature-copy h3 { font-size: 16px; font-weight: 700; margin: 16px 0 6px; }
+  .feature-copy h3:first-child { margin-top: 0; }
+  .feature-copy p { font-size: 13.5px; color: var(--ink-soft); }
+  .feature-copy ul { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .feature-copy li { font-size: 13.5px; color: var(--ink-soft); padding-left: 16px; position: relative; }
+  .feature-copy li::before { content: "・"; position: absolute; left: 0; color: var(--ink-faint); }
+
+  .pair-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 30px; }
+  .pair-shots .shot-frame { max-width: 210px; margin: 0 auto; }
+  .pair-shots .shot-label {
+    font-size: 12px; font-weight: 700; color: var(--seal); text-align: center; margin-bottom: 10px;
+  }
+
+  .item-list { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+  .item-row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 14px 18px; border: 1px solid var(--paper-line); border-radius: 4px; background: var(--paper-deep);
+  }
+  .item-row .name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+  .item-row .desc { font-size: 13px; color: var(--ink-soft); }
+  .item-row .price { font-family: var(--serif); font-weight: 700; color: var(--seal); white-space: nowrap; font-size: 15px; }
+
+  /* ---------- status footer ---------- */
+  .status {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px;
+  }
+  .status-item { border-left: 2px solid var(--seal); padding-left: 14px; }
+  .status-item .label { font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
+  .status-item .value { font-size: 14px; font-weight: 500; }
+
+  footer { padding: 40px 0 70px; text-align: center; }
+  footer p { font-size: 12.5px; color: var(--ink-faint); }
+
+  @media (max-width: 720px) {
+    .concept-grid, .board-compare, .notif-layout, .signin-layout,
+    .feature-split, .feature-split.reverse, .pair-shots { grid-template-columns: 1fr; }
+    .feature-split.reverse .shot-frame { order: 0; }
+    .timeline { grid-template-columns: 1fr 1fr; row-gap: 26px; }
+    .tl-stage:nth-child(2)::after { content: none; }
+    .status { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <svg class="hero-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="100" height="100" rx="22" fill="#3b2a1b"/>
+      <rect x="26" y="34" width="48" height="24" rx="3" fill="#f7f1e0"/>
+      <circle cx="50" cy="46" r="6" fill="#b8472e"/>
+      <path d="M46 58 L54 58 L50 82 Z" fill="#f7f1e0"/>
+    </svg>
+    <div class="wordmark" aria-hidden="true">
+      <div class="wm-tile"><span class="wm-furi">じ</span>地</div>
+      <div class="wm-tile accent"><span class="wm-furi">ばく</span>縛</div>
+      <div class="wm-tile"><span class="wm-furi">いた</span>板</div>
+    </div>
+    <h1>JIBAKUITA &nbsp;/&nbsp; プロダクト紹介</h1>
+    <p class="thesis">地図上の「その場所」に板を立て、実際に足を運んだ人だけが読める掲示板アプリ</p>
+    <p class="sub">地縛霊が土地に縛られるように、板もまたその場所に縛られる。オンラインなのに、現地に行かないと会話に参加できない——そんな体験を提供します。</p>
+  </div>
+</div>
+
+<section id="concept">
+  <div class="wrap">
+    <div class="eyebrow">CONCEPT</div>
+    <h2 class="sec-title">なぜ「地縛」板なのか</h2>
+    <p class="sec-lede">SNSは距離を消してきました。地縛板はあえて距離を戻し、「そこに行かないと読めない」制約を核に据えています。</p>
+
+    <div class="concept-pun">
+      <span class="k">地縛霊</span>
+      <span class="arrow">→</span>
+      <span class="k" style="color:var(--seal)">地縛板</span>
+      <span class="note">土地に縛られた霊、をもじって——板もまたその場所に縛られている、という世界観。</span>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="num">01</div>
+        <h3>板を立てる</h3>
+        <p>地図上の好きな場所にピンを立て、板(白板 or 金板)として投稿を開始する。</p>
+      </div>
+      <div class="concept-card">
+        <div class="num">02</div>
+        <h3>近づいて読む</h3>
+        <p>投稿内容は板から一定距離(scope)以内に実際にいる時だけ閲覧できる。</p>
+      </div>
+      <div class="concept-card">
+        <div class="num">03</div>
+        <h3>板は朽ちる</h3>
+        <p>板には寿命があり、時間とともに古びて、最後は「破れ板」になって消えていく。</p>
+      </div>
+    </div>
+
+    <div class="shot-frame map-shot">
+      <img src="images/map.png" alt="マップ画面のスクリーンショット" />
+    </div>
+    <p class="shot-cap">実際に立っている板が地図上にピンとして並ぶ、アプリのホーム画面。</p>
+  </div>
+</section>
+
+<section id="reading">
+  <div class="wrap">
+    <div class="eyebrow">SCOPE</div>
+    <h2 class="sec-title">近づかないと、読めない</h2>
+    <p class="sec-lede">板は地図上ではどこからでも見えますが、中身が読めるのは実際にその場所へ近づいた時だけです。</p>
+
+    <div class="pair-shots">
+      <div>
+        <div class="shot-label">離れた場所にある板</div>
+        <div class="shot-frame">
+          <img src="images/board-far.png" alt="離れた場所にある板のスクリーンショット" />
+        </div>
+      </div>
+      <div>
+        <div class="shot-label">近くにある板(scope内)</div>
+        <div class="shot-frame">
+          <img src="images/board-near.png" alt="近くにある板のスクリーンショット" />
+        </div>
+      </div>
+    </div>
+
+    <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="concept-card">
+        <h3>離れている間は「件数」だけ</h3>
+        <p>テキスト・写真・動画・音声、それぞれ何件投稿されているかの内訳だけが表示され、中身は見えない。経路案内でその場所へ向かうことができる。</p>
+      </div>
+      <div class="concept-card">
+        <h3>近づくと会話が開く</h3>
+        <p>板から一定距離(scope)以内に入ると、投稿された文章・画像・動画・音声をその場で閲覧できるようになる。右上のボタンから自分の投稿を追加することもできる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lifecycle">
+  <div class="wrap">
+    <div class="eyebrow">BOARD LIFECYCLE</div>
+    <h2 class="sec-title">板の一生</h2>
+    <p class="sec-lede">お札や絵馬と同じように、板は生まれてから朽ちるまでの時間が決まっています。この「儚さ」が、今その場所に行く理由になります。</p>
+
+    <div class="timeline">
+      <div class="tl-stage">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="5" y="7" width="14" height="8" rx="1.5" style="fill:none;stroke:var(--ink);stroke-width:1.4"/>
+            <path d="M10 15 L14 15 L12 21 Z" style="fill:var(--ink)"/>
+            <circle cx="12" cy="11" r="1.7" style="fill:var(--seal)"/>
+            <path d="M19.5 4.5 L20.3 6.2 L22 7 L20.3 7.8 L19.5 9.5 L18.7 7.8 L17 7 L18.7 6.2 Z" style="fill:var(--seal)"/>
+          </svg>
+        </div>
+        <span class="when">最初の24時間</span>
+        <h3>新板</h3>
+        <p>立てたばかりの板。地図上でも新着として目立つ表示になる。</p>
+      </div>
+      <div class="tl-stage">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="5" y="7" width="14" height="8" rx="1.5" style="fill:none;stroke:var(--ink);stroke-width:1.4"/>
+            <path d="M10 15 L14 15 L12 21 Z" style="fill:var(--ink)"/>
+            <circle cx="12" cy="11" r="1.7" style="fill:var(--ink-soft)"/>
+          </svg>
+        </div>
+        <span class="when">白板は最大3日</span>
+        <h3>通常</h3>
+        <p>投稿・返信のやり取りが続く、板としていちばん活発な期間。</p>
+      </div>
+      <div class="tl-stage">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="opacity:0.75">
+            <g transform="rotate(-6 12 13)">
+              <rect x="5" y="7" width="14" height="8" rx="1.5" style="fill:none;stroke:var(--ink-faint);stroke-width:1.4"/>
+              <path d="M10 15 L14 15 L12 21 Z" style="fill:var(--ink-faint)"/>
+              <path d="M9 8.5 L11 14.5" style="fill:none;stroke:var(--ink-faint);stroke-width:1"/>
+              <circle cx="12" cy="11" r="1.7" style="fill:none;stroke:var(--ink-faint);stroke-width:1.2"/>
+            </g>
+          </svg>
+        </div>
+        <span class="when">寿命の最後24時間</span>
+        <h3>古板</h3>
+        <p>もうすぐ消えることが表示され、駆け込みの投稿や閲覧が増える。</p>
+      </div>
+      <div class="tl-stage is-torn">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 7 L19 7 L18 10.5 L13.5 9.5 L15 12.5 L11 11 L12.5 14 L5 10.5 Z" transform="translate(-1.1 -1.4) rotate(-7 12 9)" style="fill:none;stroke:var(--slate);stroke-width:1.3"/>
+            <path d="M6 12.5 L18.5 15.5 L17 10.5 L12.5 12.5 L14 9 L10 11 L11 8 L6 9.5 Z" transform="translate(1.1 1.6) rotate(6 12 13)" style="fill:none;stroke:var(--slate);stroke-width:1.3"/>
+            <path d="M10 20 L14 20 L12.3 22.3 Z" style="fill:var(--slate)"/>
+          </svg>
+        </div>
+        <span class="when">寿命到達後</span>
+        <h3>破れ板</h3>
+        <p>読めなくなり、1ヶ月後には地図・検索からも自然に姿を消す。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compose">
+  <div class="wrap">
+    <div class="eyebrow">POSTING</div>
+    <h2 class="sec-title">投稿を作る</h2>
+    <p class="sec-lede">板の種類を選び、タイトルを付け、好きな形式で投稿するだけ。タグを付けておけば、あとから地図上の検索で見つけてもらいやすくなります。</p>
+
+    <div class="feature-split">
+      <div class="feature-copy">
+        <h3>4つの投稿形式</h3>
+        <p>テキスト・写真・動画・音声から選んで投稿できる。文字が苦手な場面でも、写真や音声でその場の雰囲気をそのまま残せる。</p>
+        <h3>タグで見つけてもらう</h3>
+        <ul>
+          <li>都市伝説・絶景・グルメ・イベント・歴史・自然など、板の性質を表すタグを複数付けられる</li>
+          <li>タグは地図検索や通知設定の絞り込み条件としても使われる</li>
+        </ul>
+      </div>
+      <div class="shot-frame">
+        <img src="images/compose.png" alt="新規投稿画面のスクリーンショット" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="board-kinds">
+  <div class="wrap">
+    <div class="eyebrow">MONETIZATION</div>
+    <h2 class="sec-title">白板と金板</h2>
+    <p class="sec-lede">誰でも無料で板を立てられますが、長く残したい板には「金板」という選択肢を用意しています。</p>
+
+    <div class="board-compare">
+      <div class="board-card">
+        <div class="head">白板 <span class="price">無料</span></div>
+        <ul>
+          <li>誰でもその場ですぐに立てられる</li>
+          <li>寿命は3日間</li>
+          <li>気軽な立ち話・一期一会向き</li>
+        </ul>
+      </div>
+      <div class="board-card gold">
+        <div class="head">金板 <span class="price">板立人サブスク or 都度購入</span></div>
+        <ul>
+          <li>寿命は1ヶ月</li>
+          <li>「板立人」サブスク中は表示継続中と表示され破れない</li>
+          <li>サブスクが切れても即座には破れず、1ヶ月の猶予がある</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="extend-note">
+      <b>表示期間延長権</b>
+      <span>100円で+3日。所有者本人はもちろん、第三者が延長することもでき、その場合は投稿一覧に延長を宣言する記録が自動で残る。</span>
+    </div>
+
+    <div class="feature-split reverse" style="margin-top:44px;">
+      <div class="shot-frame">
+        <img src="images/purchase.png" alt="購入・アイテム画面のスクリーンショット" />
+      </div>
+      <div class="feature-copy">
+        <h3>購入できるアイテム</h3>
+        <div class="item-list">
+          <div class="item-row">
+            <div>
+              <div class="name">板立人(サブスクリプション)</div>
+              <div class="desc">金板を無制限に立てられる。自分の破れ板も無制限に見られ、金板の管理ページも使える。</div>
+            </div>
+            <div class="price">¥300<span style="font-size:11px;">/月</span></div>
+          </div>
+          <div class="item-row">
+            <div>
+              <div class="name">金板立てる権</div>
+              <div class="desc">金板を1枚立てられる消費型アイテム。サブスクに入らず単発で使いたい時に。</div>
+            </div>
+            <div class="price">¥100</div>
+          </div>
+          <div class="item-row">
+            <div>
+              <div class="name">破れ板見る権</div>
+              <div class="desc">購入後、好きなタイミングで有効化すると1時間だけ、自分の破れ板をすべて見返せる。</div>
+            </div>
+            <div class="price">¥100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="notifications">
+  <div class="wrap">
+    <div class="eyebrow">DISCOVERY</div>
+    <h2 class="sec-title">通知と「気になる場所」</h2>
+    <p class="sec-lede">近くに新しい板が立つとプッシュ通知が届きます。通知を見逃しても、後から「気になる場所」一覧で振り返れます。</p>
+
+    <div class="feature-split">
+      <div class="feature-copy">
+        <h3>タグで通知条件を指定</h3>
+        <p>「都市伝説」「グルメ」のようにタグを選んでおくと、そのタグが付いた板のそばを通りかかった時だけプッシュ通知が届く。破れ板を含めるか、金板だけに絞るかも選べる。</p>
+      </div>
+      <div class="shot-frame">
+        <img src="images/notifications.png" alt="通知設定画面のスクリーンショット" />
+      </div>
+    </div>
+
+    <div class="feature-split reverse" style="margin-top:44px;">
+      <div class="shot-frame">
+        <img src="images/interested-boards.png" alt="気になる場所画面のスクリーンショット" />
+      </div>
+      <div class="feature-copy">
+        <h3>気になる場所リスト</h3>
+        <p>通知された板や実際に訪れた板が一覧で振り返れる。タップすると、その板がどこにあるかをマップ上ですぐに確認できる。</p>
+        <p>一覧を開くとアプリのバッジは消えるが、訪問済みの板は「訪問済み」として区別表示され、記録として残り続ける。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mypage">
+  <div class="wrap">
+    <div class="eyebrow">ACCOUNT</div>
+    <h2 class="sec-title">マイページ</h2>
+    <p class="sec-lede">アカウントに関するすべてを一箇所にまとめた、自分専用のページ。</p>
+
+    <div class="feature-split reverse">
+      <div class="shot-frame">
+        <img src="images/mypage.png" alt="マイページのスクリーンショット" />
+      </div>
+      <div class="feature-copy">
+        <ul>
+          <li>ニックネームの確認・変更(重複はできない)</li>
+          <li>購入・アイテムの管理(板立人サブスク、消費型アイテム)</li>
+          <li>通知設定へのショートカット</li>
+          <li>気になる場所(未読件数がバッジで一目でわかる)</li>
+          <li>チュートリアルの再確認</li>
+          <li>これまで訪れた板の訪問履歴</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="signin">
+  <div class="wrap">
+    <div class="eyebrow">ONBOARDING</div>
+    <h2 class="sec-title">かんたんログイン</h2>
+    <p class="sec-lede">アカウントはApple IDまたはGoogleアカウントですぐに作成でき、ニックネームを決めればすぐに板を立て始められます。</p>
+
+    <div class="signin-layout">
+      <div class="signin-copy">
+        <ul>
+          <li>Sign in with Apple / Googleログインの2方式に対応</li>
+          <li>初回ログイン後、ニックネームを設定するだけで利用開始</li>
+          <li>3〜4枚のチュートリアルで遊び方を最初に案内</li>
+          <li>ニックネームはあとからマイページでいつでも変更可能(重複はできない)</li>
+        </ul>
+      </div>
+      <div class="signin-shot">
+        <img src="images/signin.png" alt="ログイン画面のスクリーンショット" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="eyebrow">NOW</div>
+    <h2 class="sec-title">現在の状況</h2>
+    <p class="sec-lede">現在は関係者によるフィールドテストの段階です。</p>
+    <div class="status">
+      <div class="status-item">
+        <div class="label">フェーズ</div>
+        <div class="value">クローズドフィールドテスト中</div>
+      </div>
+      <div class="status-item">
+        <div class="label">対応ログイン</div>
+        <div class="value">Apple ID / Google</div>
+      </div>
+      <div class="status-item">
+        <div class="label">直近の改善</div>
+        <div class="value">投稿画面の再設計・通知バッジ導線</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>この資料はGitHubリポジトリ pintalk-docs で管理されています。内容の追加・修正はお気軽にどうぞ。</p>
+  </div>
+</footer>
+
+</body>
+</html>
